@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
+  <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/jquery-ui-timepicker-addon.js"></script>
+</head>
+
+<body id="body">
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main>
+    <div class="container-fulid">
+      <div class="dashboard user-management">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">用戶權限管理</h2>
+              <div class="tool-bar">
+                <form class=" d-md-inline-block me-auto">
+                  <div class="input-group input-group-merge">
+                    <span>車格編號查詢：</span>
+                    <!-- Input -->
+                    <input type="text" class="form-control " placeholder="">
+                    <button class="btn btn-primary btn-search" type="button" onclick="numberSearch();"><i
+                        class="bi bi-search"></i></button>
+                  </div>
+                </form>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table charge-table user-table">
+                    <thead>
+                      <tr>
+                        <th>充電樁車格</th>
+                        <th>用戶戶號</th>
+                        <th>編輯用戶</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>G10</span></td>
+                        <td><input class="form-control readonly" value="G10210"
+                            onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></a></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">編輯用戶</a>
+                          <a href="javascript:void(0);" class="save-btn " style="display: none;">儲存設定</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>C34</span></td>
+                        <td><input class="form-control readonly" value="F10308"
+                            onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></a></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">編輯用戶</a>
+                          <a href="javascript:void(0);" class="save-btn " style="display: none;">儲存設定</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>G53</span></td>
+                        <td><input class="form-control readonly" value="C20315"
+                            onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></a></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">編輯用戶</a>
+                          <a href="javascript:void(0);" class="save-btn" style="display: none;">儲存設定</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-12">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<script>
+  $('.edit-btn').click(function () {
+    $(this).parents('tr').find('.form-control').removeClass('readonly')
+    $(this).hide();
+    $(this).next('.save-btn').show();
+
+  })
+  $('.save-btn').click(function () {
+    $(this).parents('tr').find('.form-control').addClass('readonly')
+    $(this).hide();
+    $(this).siblings('.edit-btn').show();
+    location.href = location.href;
+
+  })
+
+  $("#datepicker").datepicker({
+    dateFormat: 'yy/mm',
+    changeMonth: true,
+    changeYear: true,
+    monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+
+  });
+  function Calculate() {
+
+
+  }
+  //車格編號查詢
+  function numberSearch() {
+
+  }
+
+</script>
+<script src="js/web.js?t=1"></script>

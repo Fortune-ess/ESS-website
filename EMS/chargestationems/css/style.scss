@@ -1,0 +1,585 @@
+@charset "utf-8";
+@import "bootstrap-icons";
+@import "glyphicons?t=20221114";
+$ws : max-width; //width smaller
+$wb : min-width; //width bigger
+$sidebarWidth:250px;
+$menuHide:1024px;
+
+$bark-blue:#203864;
+$blue:#184aa8;
+$blue-light: rgb(54, 162, 235);
+$green:#7BC29D;
+$red:#FF2335;
+$orange: rgb(255, 159, 64);
+$yellow: rgb(255, 205, 86);
+//$green: rgb(75, 192, 192);
+$purple: rgb(153, 102, 255);
+$grey: rgb(201, 203, 207);
+
+$yellow: #FFFFA1;
+@mixin ulclear{list-style: none;padding:0;margin:0;}
+*{box-sizing: border-box;}
+body, html{height:100%}
+body{
+    padding-top: 74px;
+    font-family: 'microsoft jhenghei',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+header{
+    background-color: #fff;
+    //border-bottom: 3px solid #184aa8;
+    img{height: 45px;margin-left: 16px;}
+    .link-btn{background-color: #ddd;color: #203864;border-radius: 4px;margin-left: 8px;padding: 4px;width: 32px;height: 32px;display: inline-block;text-align: center;}
+&.navbar{display: flex;justify-content: space-between; position: fixed;z-index: 999;
+    top:0;left: 0;right: 0;}
+.header-link{float: right;margin-right: 16px;
+    i{font-size: 18px;}
+}
+}
+.sidebar{
+    width: $sidebarWidth;
+    background-color: $bark-blue;
+    padding: 2rem 1rem;
+    height: 100%;
+    position: fixed;
+    top: 74px;
+    left: 0;
+    transition:  .2s ease-in;
+    .nav{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .nav-link{
+        display: block;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+        color:#acbbd8;
+        transition: .2s ease-in;
+        &:hover{color: #fff;}
+        &.active{
+            background-color:#fff ;
+            color:$bark-blue;
+        }
+        .nav-icon{margin-right: 8px;}
+    }
+    &.active{
+        transform: translateX(-100%);
+    }
+    i{font-size: 20px;}
+}
+main{
+    margin-left: $sidebarWidth;
+    //background-color: #fff;
+    background-image: linear-gradient(90deg, #fdfbfb 0%, #ebedee 100%);
+    transition:  .2s ease-in;
+    &.active{
+        margin-left: 0;
+    }
+}
+.dashboard{
+    padding: 24px;
+    min-height: calc(100vh - 74px)
+}
+.card{
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    //box-shadow: 0 0 10px #ddd;
+    padding: 32px;
+    margin-bottom:24px;
+    border: 2px solid #ddd;
+    .card-header{
+        display: flex;justify-content: space-between;align-items: center; 
+        padding: 0;background-color: transparent;border: 0;
+    }
+    .card-title{
+        font-size: 20px;
+        font-weight: bold;
+        color: #30528f;
+        .text-small {
+            display: block;
+            font-size: 16px;
+            color: #888;
+            margin-top: 4px;
+        }
+       
+    }
+}
+.card-sum{
+    text-align: center;font-weight:bold;
+    background-position: center 80%;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    .card-info{font-size: 19px;}
+    .text-num{margin-top: 0.5rem;}
+    .unit{font-size: 18px;}
+  
+}
+.col-md-4 {
+    &:nth-child(odd){
+        .card-sum,.card-title{color:#ea6e03;}
+        .card-sum{
+            color:#ea6e03;
+            background-image: url(../images/SVG/bar-bg-o.svg);
+        } 
+    }
+    &:nth-child(2){
+        .card-sum{
+            color:#30528f;
+            background-image: url(../images/SVG/bar-bg-b.svg); 
+        }
+    }
+}
+.col-xl-5,.col-xl-7,.col-md-4{flex-grow: 0;}
+//
+.status-lable{
+    border-radius: 16px;    padding: 4px 12px;font-size:14px;letter-spacing: 2px;
+    display: none;
+    &.adequate{background-color: #89B030;color: #fff;}
+    &.almost-full{background-color: #ea6e03;color: #fff;display: block;}
+    &.full{background-color: #d62d43;color: #fff;}
+}
+.capacity-bar {
+    height: 45px;
+    position: relative;
+    .bar{
+        background: #a0a6bb;
+        position: absolute;
+        top: 25px;
+        left: 0px;
+        height: 20px;
+        border-radius: 4px;
+
+        .capacity-num{
+            color: #aaa;
+            font-weight: bold;
+            font-size: 12px;
+            position: absolute;
+            right: 0;
+            top: -18px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            bottom: 0px;
+            .unit{display: inline;}
+        }
+        .now-num{
+            font-size: 18px;
+            top: -29px;
+            background-color: #f1f1f1;
+            display: inline-table;
+        }
+    }
+}
+.text-num{display: block;font-size: 3rem;font-weight: bold;}
+.info-box {
+    position: relative;
+    border-radius: 10px;
+    border: 3px solid #506283;
+    margin: 8px;
+    width: calc(50% - 16px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    color:$bark-blue;
+    .info-id{
+        position: absolute;
+        top:-16px;
+        padding: 4px 12px;
+        background-color: #f1f1f1;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .info-content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        .temp,.wet{text-align: center;width: 50%;}
+        .wet{border-left: 3px solid #ddd;}
+    }
+    @media screen and (max-width:576px) {
+        width: calc(100% - 16px);      
+    }
+}
+@media screen and (max-width:1400px) and (min-width:$menuHide) { 
+    .text-num{font-size: 2rem;}
+    .card{padding: 15px;}
+}
+//管理介面
+h2.page-title {
+    color: #203864;
+    font-weight: bold;
+    font-size: 24px;
+}
+.tool-bar{display: flex;justify-content: space-between;margin-bottom: 1rem;flex-wrap: wrap;}
+.edit-btn, .btn-download{
+    background-color: $bark-blue;
+    border-color: #203864;
+    color:#fff;
+    padding: 4px 12px;
+    svg, i{margin-right: 8px;}
+}
+.save-btn{
+    background-color: #e67021;
+    color:#fff;
+    padding: 4px 12px;
+    svg, i{margin-right: 8px;}
+    &:hover{background-color: #e67021;color:#fff;opacity: 0.8;}
+}
+.add-btn{
+    border:1px solid $blue;
+    color:$blue;
+    &:hover{
+        border:1px solid $blue;
+        background-color: #fff;
+    }
+}
+.cancle-btn{color: #d62d43;
+    &:hover{
+        color: $red;
+        text-shadow: 0 0 5px rgb(245, 204, 204);
+    }
+} 
+.btn-round{background: #203864; border-radius: 18px; padding: 6px 20px; border-color: #203864;}
+.table{text-align: center;border: 1px solid #ddd;
+    background-color: #fff;;
+    td,th{border-right: 1px solid #ddd;
+    &:last-child{border-right: 0;}
+    }
+    thead{
+        background-color: $bark-blue;
+        color: #fff;
+    }
+}
+.badge {border-radius: 4px; padding: 4px 8px; letter-spacing: 1px; }
+.text-bg-success{background-color: #70AD47!important}
+.text-bg-warning{color: #fff!important;background-color:#ff9800!important}
+.text-bg-danger{background-color: #C00000!important}
+.dateinput{
+    position: relative;
+    .datepicker{padding-right: 20px;}
+    svg,i{
+    position: absolute;
+    top:8px;
+    right: 20px;
+    pointer-events: none;
+    }
+
+}
+.datetimepicker{font-size: 12px;}
+.status-label{border-radius: 8px;padding: 4px 8px;    width: 100px; display: inline-block; text-align: center;pointer-events: none;}
+.opacity70{opacity: .7;cursor: pointer;pointer-events:inherit}
+.readonly {pointer-events: none; }
+.status-active{background-color: #e67021;color:#fff}
+.status-unsecured{background-color: #e8e8e8;color:#555}
+.input-group .form-control{margin-right: 0;}
+.input-group{align-items: center;
+ span{color:#888}
+}
+.active>.page-link, .page-link.active{background-color: #bbb;border-color: #bbb;}
+//充電樁表格
+.charge-table{
+    text-align: center;
+    td{vertical-align: middle;}
+    input.form-control{width: 70px;text-align: center;display: inline-block;margin-right: 4px;background: unset;}
+    .form-control.readonly{
+        border:0px;
+        &:focus{border-color:transparent;box-shadow:0 0 0}
+    }
+    @media screen and (max-width:550px) {
+        thead{display: none;}
+        tr,td{display: block;}
+        tr:nth-child(2n){background-color: #ecf5ff;}
+        td{text-align: left;}
+        td::before{content:'';width: 50%;display: inline-block;}
+        td:nth-child(1)::before{content:'充電樁ID';}
+        td:nth-child(2)::before{content:'控制群組';}
+        td:nth-child(3)::before{content:'保障狀態';}
+        td:nth-child(4)::before{content:'功率設定';} 
+    }
+}
+//電費
+
+.ele-bill {
+    display: flex; align-items: center;
+    .bill-box{
+        display: flex; align-items: center;margin-right: 8px; font-weight: bold;    flex-wrap: wrap;
+        span{border-radius: 0.375rem; padding: 4px 12px;border: 1px solid;margin-right: 4px;}
+    }
+    label {
+        position: absolute;color:#111; top: 4px; left: 8px;
+    }
+    .readonly{border:1px solid #111;}
+    .form-control{width: 100px;padding: 4px 12px;text-align: center;}
+    .peak-bill{color:$red;}
+    .off-peak{ color:$green;}
+
+}
+.Illustration{
+    display: flex;
+    >div{
+        margin-right: 8px;
+       
+        &::before{
+            content: '';   
+            width: 20px;height: 20px;
+            display: block;
+            border-radius: 0.375rem; margin-right: 4px;
+        }
+    }
+    .peak{
+        display: flex; color:$red;
+        &::before{
+            background-color: $red;
+        }
+    }
+    .off-peak{
+        display: flex; color:$green;
+        &::before{
+            content: '';
+            background-color: $green;
+        }
+    }
+   
+}
+.period-swicth{
+    display: flex;   border-radius: 0.375rem; 
+    .hour-box{
+        width: 4.1%;margin-right: 1px;
+        position: relative;
+        &:first-child .hour{ border-radius: 0.375rem 0 0 0.375rem ; }
+        &:last-child .hour{ border-radius:  0 0.375rem 0.375rem 0; }
+        &:last-child::after{content: '0點';position: absolute; right: -10px;font-size: 12px;color:#555;    margin-top: 5px;}
+        span{
+            margin-left: -10px;
+            font-size: 12px;color:#555;
+        }
+    }
+    .hour{height: 40px;}
+    .rush-hour{background-color: $red;}
+    .off-peak{ background-color: $green;}
+}
+.calcBill .tool-bar{justify-content: flex-start;}
+.form-control{width: 150px;margin-right: 8px;}
+.elecalc-table-outter{overflow-y: scroll;max-height:300px;}
+.elecalc-table{
+    @media screen and (max-width:550px) {
+        thead{display: none;}
+        tr,td{display: block;}
+        tr:nth-child(2n){background-color: #ecf5ff;}
+        td{text-align: left;}
+        td::before{content:'';width: 50%;display: inline-block;color: $blue;}
+        td:nth-child(1)::before{content:'用戶戶號';}
+        td:nth-child(2)::before{content:'充電樁ID';}
+        td:nth-child(3)::before{content:'尖峰度數';}
+        td:nth-child(4)::before{content:'尖峰總計';}
+        td:nth-child(5)::before{content:'離峰度數';}
+        td:nth-child(6)::before{content:'離峰總計';}
+        td:nth-child(7)::before{content:'總度數';} 
+        td:nth-child(8)::before{content:'總費用';}
+    }
+}
+
+//history
+.tool-bar.hasDownload{justify-content: flex-start; position: relative; padding-right:55px; flex-wrap: wrap;
+    .btn-download{position: absolute; right:0; height: 38px;padding: 6px 12px;    background-color: #656d7b; border: 1px solid #656d7b;
+    i{margin-right: 0;}
+    }
+}
+.history .tool-bar {justify-content: flex-start; position: relative; flex-wrap: wrap;}
+.filiter-wrap{display: flex;align-items: center;margin-left: 50px;
+.form-control{appearance:auto;}
+
+}
+.footer-bar{display: flex;justify-content: flex-end;    align-items: center;flex-wrap:wrap;
+p{margin-right: 10px;}
+}
+//user-management
+
+.user-management{
+    .tool-bar{justify-content: flex-start;flex-wrap: wrap;margin-bottom:8px;    align-items: baseline;}
+    .btn-search{ color: #ffffff; background-color: #265dc1;border-color:#ced4da;
+        &:hover{ background-color: #184aa8;border-color:#ddd;}
+    }
+    .charge-table input.form-control{width: 98px;}
+    .edit-btn{background:transparent;color: #184aa8;
+     &:hover{
+        color:#1565f9;
+        text-shadow:0 0 5px #b8cffa ;
+     }
+    }
+    .save-btn{background:transparent;color: #03a9f4;
+        &:hover{
+            color:#00bcd4;
+            text-shadow:0 0 5px #d1f0fa ;
+         }
+    }
+    // .btn{margin-right: 8px; margin-bottom:8px;padding: 6px 12px;}
+    // .form-control{margin-bottom:8px;}
+   .user-table{   
+        span{padding: 4px 20px;    display: inline-block;} 
+        .form-control{margin: auto;}
+    }
+}
+.txt-info {
+    color: $bark-blue;
+    span{margin-right: 24px; display: inline-block; font-weight: bold;}
+}
+//rwd-table
+.rwd-table td:before {
+    display: none;
+    }
+    .rwd-table th, .rwd-table td {
+    display: table-cell;
+    padding: 0.25em 0.5em;
+    }
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+    padding-left: 0;
+    }
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+    padding-right: 0;
+    }
+    .rwd-table th,
+    .rwd-table td {
+    padding: .5em !important;
+    }
+
+    
+    @media (max-width: 768px) {
+        .rwd-table {
+            background: #fff;
+            overflow: hidden;
+        }
+            
+        .rwd-table tr:nth-of-type(2n){
+            background: #eee;
+         }
+            .rwd-table {
+        min-width: 100%;
+            }
+            .rwd-table th {
+            display: none;
+            }
+            
+            .rwd-table td {
+            display: block;
+            }
+            
+            .rwd-table td:before {
+            content: attr(data-th) " : ";
+            font-weight: bold;
+            width: 8em;
+            display: inline-block;
+            }
+            
+            .rwd-table th, .rwd-table td {
+            text-align: left;
+            }
+            
+            .rwd-table th, .rwd-table td:before {
+            color: $blue;
+            font-weight: bold;
+            }
+    }
+    
+    
+@media screen and (max-width:$menuHide) {
+    main{margin-left: 0;}
+    .sidebar{
+        z-index: 50;
+        transform: translateX(-$sidebarWidth);
+        &.active{
+            transform: translateX(0);
+        }
+    }
+    .card{padding: 16px;}
+    .period-swicth{
+        flex-wrap: wrap;
+        .hour-box{width: 8.1%;}
+
+    }
+   
+    //history
+    .tool-bar.hasDownload{padding-right: 0px;    align-items: flex-end;}
+    .tool-bar.hasDownload .btn-download{position: relative;     margin-left: 8px;}
+}
+@media screen and (max-width:800px) {
+    .filiter-wrap{margin-left: 0;    margin-top: 10px;}
+    .history .dateinput{width: 49%;
+    &:first-child{margin-right: 2%;}
+        .form-control{width: 100%;}
+    }
+    .tool-bar.hasDownload .btn-download{position: relative;     margin-left: 8px;}
+}
+@media screen and (max-width:600px) {
+    .btn{margin-top: 10px;}
+    .btn-search{margin-top: 0;}
+    //電費
+    .period-swicth .hour-box{width: 24.5%;}
+    .Illustration{
+        order: 2;
+        margin-top: 20px;
+    }
+    .ele-bill .bill-box{
+        border: 1px solid;
+        border-radius: 8px;
+        padding: 5px;
+        justify-content: center;
+        span{border:0}
+    }
+    //history
+    .tool-bar{flex-wrap: wrap;align-items:unset;
+        .dateinput{width: 100%;
+            &:first-child{margin-right: 0;}
+            .form-control{width: 100%;}
+        }
+    .filiter-wrap{width: 100%;}
+     .filiter-wrap .form-control{width: calc(100% - 85px);    margin-right: 0;}
+     .start-time{margin-bottom:4px;}
+    }
+    .calc-btn{width: 100%;}
+    .btn-download{width: 50px;}
+    .calc-btn-left{width: calc(100% - 60px)}
+    .abnormal-table{
+        thead{display: none;}
+        tr,td{display: block;}
+        tr:nth-child(2n){background-color: #ecf5ff;}
+        td{text-align: left;}
+        td::before{content:'';width: 50%;display: inline-block;color: $blue;}
+        td:nth-child(1)::before{content:'時間';}
+        td:nth-child(2)::before{content:'充電樁ID';}
+        td:nth-child(3)::before{content:'異常代碼';}
+        td:nth-child(4)::before{content:'異常原因';}
+  
+}
+}
+.input-group-addon{text-align: right;}
+.swal2-styled.swal2-confirm{background-color: $blue!important;}
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgb(78 126 219 / 50%)!important;
+}
+.swal2-html-container .input-group{
+    margin-bottom:8px; 
+}
+// .ui-datepicker .ui-datepicker-prev::before{content: "\e091";}
+// .ui-datepicker .ui-datepicker-next:before{content: "\e092";}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+    border:0;border-radius: 4px;
+    background: unset;
+}
+.ui-state-default.ui-state-highlight{
+    border: 1px solid #dad55e;
+    background: #fffa90;
+}
+.ui-state-active{
+    border:0;
+    background-image: linear-gradient(to bottom,#08c,#04c)!important;
+    color:#fff!important;
+}

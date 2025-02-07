@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/bootstrap.min.js"></script> 
+  <script src="js/bootstrap-datetimepicker.min.js"></script>   
+</head>
+
+<body id="body">
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main>
+    <div class="container-fulid">
+      <div class="dashboard user-management">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">系統權限管理</h2>
+              <div class="tool-bar">
+                <form class=" d-md-inline-block me-auto">
+                  <div class="input-group input-group-merge">
+                    <span>帳號查詢：</span>
+                    <!-- Input -->
+                    <input type="text" class="form-control "placeholder="">
+                    <button  class="btn btn-primary btn-search" type="button" onclick="adminSearch();"><i class="bi bi-search"></i></button>
+                  </div>
+                </form>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table charge-table admin-table">
+                    <thead>
+                      <tr>
+                        <th>使用帳號 </th>
+                        <th>密碼</th>
+                        <th>修改帳戶</th>
+                        <th>刪除帳戶</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input class="admin-name form-control readonly" value="G10"></td>
+                        <td><input type="password" class="form-control readonly" value="G10210"></td>
+                        <td><a href="javascript:void(0);" class=" edit-btn ">修改</a></td>
+                        <td><a href="javascript:void(0);" class=" cancle-btn ">刪除</a></td>
+                      </tr>
+                      <tr>
+                        <td><input class="admin-name form-control readonly" value="C34"></span></td>
+                        <td><input type="password" class="form-control readonly" value="F10308"></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">修改</a>
+                        </td>
+                        <td><a href="javascript:void(0);" class=" cancle-btn ">刪除</a></td>
+                      </tr>
+                      <tr>
+                        <td><input class="admin-name form-control readonly" value="G53"></span></td>
+                        <td><input type="password" class="form-control readonly" value="C20315"></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">修改</a>
+                        </td>
+                        <td><a href="javascript:void(0);" class=" cancle-btn ">刪除</a></td>
+                      </tr>
+                      <tr>
+                        <td><input class="admin-name form-control readonly" value="G53"></span></td>
+                        <td><input type="password" class="form-control readonly" value="C20315"></td>
+                        <td>
+                          <a href="javascript:void(0);" class=" edit-btn ">修改</a>
+                        </td>
+                        <td><a href="javascript:void(0);" class=" cancle-btn ">刪除</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button  class="btn add-btn " type="button" onclick="Add();"><i class="bi bi-plus-lg"></i>新增帳戶</button>
+                </div>
+                <div class="col-md-12">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<script>
+  function Add(){
+    var add_tr="<tr>" ;
+      add_tr+="<td><input type='text' class='admin-name form-control'></td>" ;
+      add_tr+="<td><input type='text' class='form-control password' ></td>" ;//
+      add_tr+="<td><a href='javascript:void(0);' class='save-btn' onclick='Save($(this));'>儲存</a><a href='javascript:void(0);' class='edit-btn' style='display:none;' >修改</a></td>" ;
+      add_tr+="<td><a href='system-admin.html' class='cancle-btn'>刪除</a></td>" ;
+      add_tr+="</tr>"
+    $('.admin-table').append(add_tr);
+  }
+ 
+  //新增儲存
+  function Save(obj){
+    var bool = true; msg = "";
+    var admin = obj.parent('td').parent('tr').find('.admin-name').val();
+    var password =  obj.parent('td').parent('tr').find('.password').val();
+      if(admin==""){bool = false; msg += "請填寫帳號<br>"}
+      if(password==""){bool = false; msg += "請填寫密碼<br>"}
+      if (bool) {
+        $('input.form-control ').addClass('readonly')
+          obj.parent('td').parent('tr').find('.password').attr('type','password');
+          obj.parent('td').parent('tr').find('.cancle-btn').attr('href','javascript:void(0);');
+          obj.siblings('.edit-btn').show();
+          obj.remove(); 
+          Swal.fire({ title: '帳戶已新增',icon:"success",});
+        //location.href=location.href
+      }
+      else{
+        Swal.fire({ icon:'warning', html: msg, });
+      };
+   
+  };
+  //修改密碼
+  $('.edit-btn').click(function () {
+    var admin = $(this).parent('td').parent('tr').find('.admin-name').val();
+    var _html = "<div class=''>"
+    _html += "<div class='input-group'><span class='input-group-addon col-sm-4'>輸入舊密碼：</span><input class='form-control oldPassword' type='text' autocomplete='off' placeholder='' name='oldPassword'></div>";
+    _html += "<div class='input-group'><span class='input-group-addon col-sm-4'>輸入新密碼：</span><input class='form-control newPassword' type='text' autocomplete='off' placeholder='' name='newPassword'></div>";
+    _html += "<div class='input-group'><span class='input-group-addon col-sm-4'>重新輸入新密碼：</span><input class='form-control newPasswordAgain' type='text' autocomplete='off' placeholder='' name='newPasswordAgain'></div>";
+    _html += "</div>";
+
+    Swal.fire({
+      title: "您要修改的帳戶:" + admin ,
+      html:_html,
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '確定',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        var bool = true, msg = "";
+        var oldPassword = $('.swal2-shown .oldPassword').val();
+        var newPassword = $('.swal2-shown .newPassword').val();
+        var newPasswordAgain = $('.swal2-shown .newPasswordAgain').val();
+        console.log(oldPassword)
+        if (oldPassword == "" || newPassword == "" || newPasswordAgain == "") { bool = false; msg += "欄位請勿留空<br />"; }
+        if (newPassword != newPasswordAgain) { bool = false; msg += "兩次密碼不相符,請重新輸入 <br />"; }
+        if (bool) {
+          // Swal.fire({
+          //   title: "修改密碼",
+          //   text: "正在發送密碼重設連結.....",
+          //   showConfirmButton: false,
+          // });
+
+          // $.post('/AJAX/_AJAX.ashx', {
+          //   action: '',
+          //   oldPassword: oldPassword,
+          //   newPassword: newPassword,
+          //   newPasswordAgain: newPasswordAgain,
+          // },
+          //   function (rest) {
+             // if (rest == "ok") { 
+                Swal.fire({ title: '修改密碼', text: '密碼已更新', showCancelButton: false, showConfirmButton: false ,icon:"success",}); 
+              //}
+            // });
+
+        } else Swal.fire({ icon:'warning', html:msg, showCancelButton: false, showConfirmButton: true });
+      }
+      else return false;
+    });
+})
+  
+  //刪除
+  $('.cancle-btn').click(function () {
+    var admin = $(this).parent('td').parent('tr').find('.admin-name').val();
+    Swal.fire({
+      title:'要刪除帳戶:'+admin+'?',
+      icon:"question",
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '確定',
+}).then((result) => {
+  if (result.isConfirmed) {
+    var tr = $(this).parent('td').parent('tr');
+    tr.remove();
+    Swal.fire({
+      icon:"success",
+      title:'帳戶已刪除',
+    })
+  }
+    
+})});
+//帳號查詢
+function adminSearch(){
+
+}
+</script>
+<script src="js/web.js?t=1"></script>

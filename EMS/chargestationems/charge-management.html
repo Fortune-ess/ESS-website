@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
+  <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/jquery-ui-timepicker-addon.js"></script>
+  
+  <script src="js/vue.min.js"></script>
+</head>
+
+<body id="body">
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main id="main">
+    <div class="container-fulid">
+      <div class="dashboard">
+        <h2 class="page-title">充電樁管理列表</h2>
+        <div class="tool-bar">
+          <form class=" d-md-inline-block me-auto">
+            <div class="input-group input-group-merge">
+              <!-- Input -->
+              <span class="search-txt">關鍵字搜尋：</span>
+              <input type="text" class="form-control" id="search-value" placeholder="" v-on:keyup="search(event);" maxlength="8">
+            </div>
+          </form>
+          <button class="btn btn-primary edit-btn " type="button" onclick="Edit();"><i
+              class="bi bi-gear"></i>編輯設定</button>
+          <button class="btn save-btn " type="button" v-on:click="save();" style="display: none;"><i
+              class="bi bi-check-lg"></i>儲存設定</button>
+        </div>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <table class="table charge-table">
+                <thead>
+                  <tr>
+                    <th>充電樁ID</th>
+                    <th>控制群組</th>
+                    <th>保障狀態</th>
+                    <th>功率設定</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="charger,index in 充電樁show">
+                        <td>{{charger["充電樁ID"]}}</td>
+                        <td>{{charger["控制群組"]}}</td>
+                        <td><span class="status-label" :class="charger['保障狀態']==='啟用'?'status-active':'status-unsecured'"
+                            v-on:click="statusChange(charger);">{{charger["保障狀態"]}}</span></td>
+                        <td><input type="number" class="form-control readonly" v-model="charger['功率設定']" maxlength="3">kW</td>
+                    </tr>
+                  <!-- <tr>
+                    <td>A103</td>
+                    <td>A-1</td>
+                    <td><span class="status-label status-active">啟用</span></td>
+                    <td><input type="text" class="form-control readonly" value="7"
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4">kW</td>
+                  </tr>
+                  <tr>
+                    <td>A103</td>
+                    <td>A-1</td>
+                    <td><span class="status-label status-unsecured">無保障</span></td>
+                    <td><input type="text" class="form-control readonly" value="7"
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4">kW</td>
+                  </tr>
+                  <tr>
+                    <td>A103</td>
+                    <td>B-3</td>
+                    <td><span class="status-label status-unsecured">無保障</span></td>
+                    <td><input type="text" class="form-control readonly" value="7"
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4">kW</td>
+                  </tr>
+                  <tr>
+                    <td>A103</td>
+                    <td>C-2</td>
+                    <td><span class="status-label status-unsecured">無保障</span></td>
+                    <td><input type="text" class="form-control readonly" value="7"
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4">kW</td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<script>
+</script>
+
+
+
+<script src="pagejs/charge-management.js"></script>
+
+<script src="js/web.js"></script>

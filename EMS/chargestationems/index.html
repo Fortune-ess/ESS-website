@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
+  <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/jquery-ui-timepicker-addon.js"></script>
+  <script src="js/Chart.min.js"></script>
+
+  <script src="js/vue.min.js"></script>
+</head>
+
+<body id="body">
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main id="main">
+    <div class="container-fulid">
+      <div class="dashboard">
+        <div class="row">
+          <div class="col-xl-5">
+            <div class="card" style="height: calc(100% - 24px);">
+              <h3 class="card-title"> <span></span> </h3>
+              <div class="card-header ">
+
+                <h3 class="card-title">
+                  <span class="card-label">即時容量警示</span>
+                  <span class="text-small ">契約容量：100kW</span>
+                </h3>
+                <div class="status">
+                  <span class="status-lable adequate">容量充足</span>
+                  <span class="status-lable almost-full">即將超約</span>
+                  <span class="status-lable full">功率滿載</span>
+                </div>
+              </div>
+              <div class="capacity-bar">
+                <div id="contract-bar " class="bar" style="width:100% ">
+                  <!-- <span class="capacity-num">100 kW</span> -->
+                </div>
+                <div id="status-bar" class="bar">
+                  <span class="now-num capacity-num">60 kW</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7">
+            <div class="row">
+              <div class=" col-md-4">
+                <div class="card card-sum">
+                  <h3 class="card-title"> 本日最高輸出</h3>
+                  <div class="card-info"> {{本日最高輸出.t}}</div>
+                  <div class="text-num"> {{本日最高輸出.p}}<span class="unit">kW</span></div>
+                </div>
+              </div>
+              <div class=" col-md-4">
+                <div class="card card-sum">
+                  <h3 class="card-title"> 本日用電</h3>
+                  <div class="card-info"> 總度數</div>
+                  <div class="text-num"> {{本日用電.toFixed(1)}}<span class="unit">kW</span></div>
+                </div>
+              </div>
+              <div class=" col-md-4">
+                <div class="card card-sum">
+                  <h3 class="card-title"> 本日充電次數</h3>
+                  <div class="card-info"> 總樁數：{{總樁數}}</div>
+                  <div class="text-num"> {{本日充電次數}}<span class="unit">次</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-5">
+            <div class="card">
+              <h3 class="card-title"> 充電樁即時狀態</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>總充電樁數量</th>
+                    <th>使用</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{總樁數}}</td>
+                    <td>{{本日充電次數}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>充電樁ID</th>
+                    <th>輸出(kW)</th>
+                    <th>狀態</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                  <tr v-for="charger,index in 充電樁">
+                    <td>{{charger["充電樁ID"]}}</td>
+                    <td>{{charger["輸出(kW)"].toFixed(2)}}</td>
+                    <td><span class="badge" :class="getChrageStatus(charger['狀態'])">{{charger["狀態"]}}</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>1101</td>
+                    <td>7.12</td>
+                    <td><span class="badge text-bg-success">使用中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1102</td>
+                    <td>0.00</td>
+                    <td><span class="badge text-bg-warning">待機中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1103</td>
+                    <td>3.14</td>
+                    <td><span class="badge text-bg-danger">故障中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1104</td>
+                    <td>7.12</td>
+                    <td><span class="badge text-bg-warning">待機中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1105</td>
+                    <td>0.00</td>
+                    <td><span class="badge text-bg-warning">待機中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1106</td>
+                    <td>3.14</td>
+                    <td><span class="badge text-bg-success">使用中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1107</td>
+                    <td>7.12</td>
+                    <td><span class="badge text-bg-success">使用中</span></td>
+                  </tr>
+                  <tr>
+                    <td>1108</td>
+                    <td>0.00</td>
+                    <td><span class="badge text-bg-success">使用中</span></td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-xl-7">
+            <div class="card">
+              <h3 class="card-title"> 本日充電樁用電折線</h3>
+              <div id="chart_div" style="width:100%; position: relative;">
+                <canvas id="myChart" width="400" height="150"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="card-title"> 環境資訊</h3>
+              <div class="row">
+
+                <div class="col-sm-6 info-box" v-for="box,x in 環境資訊">
+                    <div class="info-id">{{box["控制箱ID"]}}</div>
+                    <div class="info-content">
+                      <div class="temp">溫度 <span class="text-num">{{box["溫度"].toFixed(1)}}</span></div>
+                      <div class="wet">濕度<span class="text-num">{{box["濕度"].toFixed(1)}}</span></div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-sm-6 info-box">
+                  <div class="info-id">A-1</div>
+                  <div class="info-content">
+                    <div class="temp">溫度 <span class="text-num">{{環境資訊["A-1"].溫度.toFixed(1)}}</span></div>
+                    <div class="wet">濕度<span class="text-num">{{環境資訊["A-1"].濕度.toFixed(1)}}</span></div>
+                  </div>
+                </div>
+                <div class="col-sm-6 info-box">
+                  <div class="info-id">A-2</div>
+                  <div class="info-content">
+                    <div class="temp">溫度 <span class="text-num">{{環境資訊["A-2"].溫度.toFixed(1)}}</span></div>
+                    <div class="wet">濕度<span class="text-num">{{環境資訊["A-2"].濕度.toFixed(1)}}</span></div>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<script>
+</script>
+
+<script src="pagejs/index.js"></script>
+
+<script src="js/web.js"></script>

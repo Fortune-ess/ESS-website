@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華城電機</title>
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <style scoped>
+        .block_bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .cover-txt {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .block_bg .page-title {
+            font-size: 54px;
+            color: #fff;
+            margin-top: 0;
+        }
+
+        .breadcrumb {
+            color: #4BB985;
+        }
+
+        .irr_pv {
+            text-align: center;
+            font-size: 1.7rem;
+        }
+
+        .irr_pv input {
+            margin: 0.7rem 1rem;
+            padding: 0.5rem;
+
+        }
+
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 0.28rem solid #cfcfcf;
+        }
+
+        .separator:not(:empty)::before {
+            margin-right: 2rem;
+        }
+
+        .separator:not(:empty)::after {
+            margin-left: 2rem;
+        }
+
+        .irr_btn_ls {
+            display: flex;
+            justify-content: center;
+        }
+
+        .irr_btn_ls button {
+            padding: 0.8rem 2.2rem;
+        }
+
+        .irr_title_pv {
+            display: table-cell;
+            width: 22%;
+        }
+
+        .irr_item_pv {
+            display: table;
+            width: 100%;
+            margin-left: 8rem;
+        }
+
+        .pv_unit {
+            display: table-cell;
+            padding-left: 1rem;
+        }
+
+        @media only screen and (min-width: 360px) and (max-width:540px) {
+
+            .irr_item_pv {
+                width: 100%;
+                margin-left: 0.5rem !important;
+            }
+
+            .irr_item_pv .irr_title_pv {
+                width: 50%;
+            }
+
+            .mw_block {
+                margin-left: 4rem !important;
+            }
+
+        }
+
+        @media only screen and (min-width: 350px) and (max-width:414px) {
+            body {
+                height: 100%;
+            }
+
+            .irr_title {
+                margin-right: -2rem;
+
+            }
+
+            .irr_box,
+            .irr_item,
+            small {
+                font-size: x-small;
+            }
+
+        }
+
+
+
+
+        .mw_block {
+            display: block;
+            margin-left: 9rem;
+        }
+
+        .input_mw_block {
+            margin-top: 1rem;
+        }
+
+        .old_mw {
+            padding-right: 0.8rem;
+        }
+
+        .new_mw {
+            padding-right: 3.5rem;
+
+        }
+
+        #pv_mwh,
+        #pv_mw,
+        #pv_irr {
+            border-bottom: 1px solid #888;
+            display: table-cell;
+            width: 30%;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+    </header>
+    <div class="banner">
+        <div class="block_bg">
+            <div class="cover-txt">
+                <!-- <div class="breadcrumb"><a class="item" href="/">首頁</a><span class="item">IRR試算</span></div> -->
+                <div class="page-title">儲能 & 光儲 <br>試算</div>
+            </div>
+
+            <img src="images/irr/irr_bg.jpg" alt="儲能效益試算">
+        </div>
+    </div>
+    <main>
+
+        <div class="irr_area">
+
+            <div class="container">
+                <div class="text-center">
+                    <img src="images/irr/irr-info.jpg" alt="光儲配比試算" style="max-width: 100%;">
+                </div>
+                <div class="irr_fix">
+                    <div class="irr_tag">
+                        <a class="irr_tag_item act" data-show="0" href="javascript:void(0);">儲能估算(AFC)</a>
+                        <a class="irr_tag_item" data-show="1" href="javascript:void(0);">光儲估算(配比)</a>
+                    </div>
+                    <form>
+                        <div class="irr_body">
+                            <div class="irr_info">
+                                <h3 class="irr_h3">儲能估算(AFC)</h3>
+                                <div class="irr_fixed">
+                                    <div class="irr_item">
+                                        <div class="irr_title">
+                                            <span>調頻備轉<br>輔助服務</span>
+                                        </div>
+
+                                        <div class="irr_box" style="margin-left: 3rem;">
+                                            <input type="radio" name="irrtype" id="irrtype_1">
+                                            <label for="irrtype_1">sReg</label>
+                                            <small>(1~5MW)</small>
+                                        </div>
+                                        <div class="irr_box">
+                                            <input type="radio" name="irrtype" id="irrtype_2">
+                                            <label for="irrtype_2">dReg</label>
+                                            <small>(1~5MW)</small>
+                                        </div>
+                                        <div class="irr_box">
+                                            <input type="radio" name="irrtype" id="irrtype_3">
+                                            <label for="irrtype_3">E-dReg</label>
+                                            <small>(10~200MW)</small>
+                                        </div>
+                                    </div>
+                                    <div class="irr_item">
+                                        <div class="irr_title">容量</div>
+                                        <input type="text" id="mw" placeholder="請填容量">
+                                        <p>MW</p>
+                                    </div>
+                                    <div class="irr_btn">
+                                        <button onclick="operation().location.href='#'" class="btn"
+                                            type="button">點我試算</button>
+                                        <button type="reset" class="btn">重新輸入</button>
+                                    </div>
+                                    <div class="irr_item">
+                                        <div class="irr_title">=IRR (10年)</span></div>
+                                        <input type="text" id="answer" readonly />
+                                        <p>%</p>
+                                    </div>
+                                </div>
+                                <div class="irr_tips">
+                                    ●實際值將依個別案場條件不同而有所差異，欲進一步了解，請與我們聯繫。<br>
+                                    <a href="tel:02-2704-7001#732">連絡電話 : 02-2704-7001 轉分機732或731</a>
+                                </div>
+                            </div>
+                            <div class="irr_info" data-show="2">
+                                <h3 class="irr_h3">光儲估算(配比)</h3>
+                                <p class="irr_pv">
+                                <div class="mw_block">
+                                    <div class="input_mw_block">
+                                        <label class="old_mw">太陽能既設量(1~100)</label><input type="text" id="old_mw">
+                                        MW<br>
+                                    </div>
+                                    <div class="input_mw_block">
+                                        <label class="new_mw">太陽能預計新設量</label><input type="text" id="new_mw"> MW<br>
+                                    </div>
+                                </div>
+                                <div class="separator">共計</div>
+                                <!-- <label></label><input type="text" style="margin-left:47%;margin-right:1rem;">MW<br> -->
+                                <div><span id="total_mw"
+                                        style="margin-left:69%; margin-right:2%; font-size:3rem; font-weight: bold;">
+                                    </span>MW
+                                </div><br>
+                                <div class=" irr_btn_ls" style="margin-top:-2rem;margin-bottom: 2rem;">
+                                    <button onclick="calculation().location.href='#'" class="btn"
+                                        type="button">點我試算</button>
+                                    <span style="width:5%;"></span>
+                                    <button type="reset" class="btn" onclick="resetAll()">重新輸入</button>
+                                </div>
+                                </p>
+                                <p class="irr_pv_calc">
+                                <div class="irr_item_pv">
+                                    <span class="irr_title_pv">=
+                                        儲能電池容量</span>
+                                    <span id="pv_mwh"></span>
+                                    <span class="pv_unit">(MWh)</span>
+                                </div>
+                                <div class="irr_item_pv">
+                                    <span class="irr_title_pv">=
+                                        儲能系統功率</span>
+                                    <span id="pv_mw"></span>
+                                    <span class="pv_unit">MW</span>
+                                </div>
+                                <div class="irr_item_pv">
+                                    <span class="irr_title_pv">=
+                                        IRR (10年)</span>
+                                    <span id="pv_irr"></span>
+                                    <span class="pv_unit">%</span>
+
+                                </div>
+                                </p>
+                                <div class="irr_tips">
+                                    ●實際值將依個別案場條件不同而有所差異，欲進一步了解，請與我們聯繫。<br>
+                                    <a href="tel:02-2704-7001#732"
+                                        style="color:rgb(64, 75, 224);font-weight:bold;text-decoration:underline;">連絡電話
+                                        : 02-2704-7001
+                                        轉分機732或731</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="irr_footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        $('.irr_info:eq(1)').hide()
+        $('.irr_tag_item').on('click', function () {
+            var i = $(this).data('show');
+            $('.irr_info').hide()
+            $(".irr_tag_item").removeClass('act');
+            $(this).addClass('act');
+            $('.irr_info:eq(' + i + ')').show()
+        })
+
+
+
+
+    </script>
+    <script src="js/web.js"></script>
+
+</body>
+
+</html>

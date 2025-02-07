@@ -1,0 +1,124 @@
+<%jhp//<script>
+
+
+const sys = new System(); 
+
+
+
+let main = {
+    "即時容量警示" : {
+        "contract" : 100,
+        "now" : 50
+    },
+    "本日最高輸出" : {
+        "t" : "PM 08:15",
+        "p" : 93
+    },
+    "本日用電" : 30.4,
+    "本日充電次數" : 53,
+    "總樁數" : 36,
+    "充電樁" : [
+        {"充電樁ID":1101 ,"輸出(kW)": 7.12,"狀態":"使用中"},
+        {"充電樁ID":1101 ,"輸出(kW)": 7.12,"狀態":"使用中"},
+        {"充電樁ID":1101 ,"輸出(kW)": 7.12,"狀態":"故障中"},
+        {"充電樁ID":1101 ,"輸出(kW)": 7.12,"狀態":"使用中"},
+        {"充電樁ID":1101 ,"輸出(kW)": 7.12,"狀態":"待機中"}
+    ],
+    "環境資訊" : [
+        {"控制箱ID":"A-1" , "溫度":22.1 , "濕度":35.8},
+        {"控制箱ID":"A-2" , "溫度":22.1 , "濕度":35.8}
+    ],
+
+    //['00點', '01點', '02點', '03點', '04點', '05點', '06點', '07點', '08點', '09點', '10點', '11點', '12點', '13點', '14點', '15點', '16點', '17點', '18點', '19點', '20點', '21點', '22點', '23點'],
+    "myChart" : [100, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 500, 0, 0, 19900, 12550, 32500, 37000, 43750, 35000, 17500, 5000, 200, 100],
+    "myLabels":[100, 0, 0, 0, 0, 0, 100, 0, 0, 0, 100, 500, 0, 0, 19900, 12550, 32500, 37000, 43750, 35000, 17500, 5000, 200, 100]
+}
+function EMS()
+{
+    main["即時容量警示"]["now"] = parseInt(Math.random() * 150);//main["即時容量警示"]["contract"]);
+    main["本日最高輸出"]["p"] = parseInt(Math.random() * main["即時容量警示"]["contract"]);
+    main["本日用電"] = Math.random() * 300;
+
+    // main["總樁數"] = parseInt(Math.random() * 20);
+    main["本日充電次數"] = parseInt(Math.random() * 20);
+
+    main["充電樁"] = [];
+    for( var i = 0 ; i < main["總樁數"] ; i++)
+    {
+        var v =  {"充電樁ID":1100 ,"輸出(kW)": 0,"狀態":"使用中"};
+        v["充電樁ID"] += i;
+        v["輸出(kW)"] = Math.random() * 15; 
+        var s = Math.random();
+        v["狀態"] = s < 0.33 ? "待機中" : ( s < 0.9 ? "使用中" : "故障中");       
+        main["充電樁"].push(v);    
+    }
+    
+    main["環境資訊"] = [];
+    var 總控制箱 = parseInt(Math.random() * 10) + 4;
+    for( var i = 0 ; i < 總控制箱 ; i++)
+    {
+        var v = 
+        {"控制箱ID": "A-" + i , "溫度": Math.random() * 15 + 20 , "濕度": Math.random() * 60 + 30 };
+
+        main["環境資訊"].push(v);
+    }
+    
+
+
+    
+
+    
+    for(var i = 0 ; i < main["myChart"].length ; i++ )
+    {
+        main["myChart"][i] = parseInt(Math.random() * 150);
+    }
+    
+
+    /*
+    let time = Math.floor((new Date()).getTime());
+    for(var i = 0 ; i < main["myChart"].length ; i++ )
+    {
+        main["myChart"][i] = {x: new Date(time+= i * 3600).toLocaleString('zh-TW', { hourCycle: 'h23' }).replaceAll('/','-'), y: parseInt(Math.random() * 150) };
+        //main["myLabels"][i] = new Date(time+= i * 3600).getTime();
+        
+    }
+    */
+}
+
+
+
+
+
+
+
+
+if(_SSEHANDLE !== undefined)
+{    
+    _SSEHANDLE.on("error" , function()
+    {
+        // sys.log( "error" )       
+    }); 
+
+    _SSEHANDLE.on("close" , function()
+    {
+        sys.log( "onclose" )    
+    }); 
+
+    while(true)
+    {
+        EMS();
+
+        SSEsend(`data: ${JSON.stringify(main)}\n\n`); 
+
+        //SSEclose();     
+        
+        await sys.delay( 878 );
+    }
+
+}
+
+
+
+
+
+%>

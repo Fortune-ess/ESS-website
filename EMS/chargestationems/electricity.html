@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <!-- CSS only -->
+
+
+  <!-- <link href="css/jquery-ui.min.css" rel="stylesheet"> -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-datetimepicker.min.js"></script>
+  <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+  <script src="js/Chart.min.js"></script>
+  
+  <script src="js/vue.min.js"></script>
+
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main id="main">
+    <div class="container-fulid">
+      <div class="dashboard electricity">
+        <div class="row">
+          <div class="col-xl-12">
+
+            <div class="card">
+              <div class="tool-bar">
+                <h2 class="page-title">充電尖離峰電價設定</h2>
+                <button class="btn btn-primary edit-btn " type="button" v-on:click="Edit();"><i
+                    class="bi bi-gear"></i>編輯設定</button>
+                <button class="btn save-btn " type="button" v-on:click="Save();" style="display: none;"><i
+                    class="bi bi-check-lg"></i>儲存設定</button>
+              </div>
+              <div class="tool-bar">
+                <div class="Illustration">
+                  <div class="peak">尖峰</div>
+                  <div class="off-peak">離鋒</div>
+                </div>
+                <div class="ele-bill">
+                  <div class="bill-box peak-bill">
+                    <span>尖峰電價</span>
+                    <div style="position: relative;"><label>$</label><input type="number" id="peakBill" step="0.1"
+                        class="form-control readonly" v-model="尖峰電價" onkeyup="clearNoNum(this)" maxlength="4"></div>
+                  </div>
+                  <div class="bill-box off-peak">
+                    <span>離峰電價</span>
+                    <div style="position: relative;"><label>$</label><input type="number" id="offBill" step="0.1"
+                        class="form-control readonly" v-model="離峰電價" onkeyup="clearNoNum(this)" maxlength="4"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="period-swicth">
+
+                <div class="hour-box" v-for="prc,x in 電價" v-show="renderComponent">
+                    <div class="hour" :class="prc===false?'rush-hour':'off-peak'" 
+                        v-on:click="change(x)"></div>
+                    <span>{{x}}點</span>
+                </div>
+
+                <!-- <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>0點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>1點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>2點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>3點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>4點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>5點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>6點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>7點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>8點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>9點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>10點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>11點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>12點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>13點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>14點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>15點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>16點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>17點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>18點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>19點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>20點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour rush-hour  readonly"></div>
+                  <span>21點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>22點</span>
+                </div>
+                <div class="hour-box">
+                  <div class="hour off-peak  readonly"></div>
+                  <span>23點</span>
+                </div> -->
+
+              </div><!--end period-swicth-->
+            </div>
+
+          </div>
+          <div class="col-xl-12">
+            <div class="card calcBill">
+              <h2 class="page-title">電費計算</h2>
+              <div class="tool-bar hasDownload">
+                <div class="dateinput">
+                  <input type='text' id="datepickerelecalc" class='pickDate  form-control set-time' name='settime'
+                    :value='thisMonth()' placeholder="年/月" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <button class="btn btn-primary btn-round calc-btn calc-btn-left " type="button" onclick="Calculate();">試算</button>
+                <a href="javascript:void(0)" class="btn btn-download btn-primary" id="elecalcDownload"
+                  download="電費試算表.csv"><i class="bi bi-download"></i> </a>
+              </div>
+              <div class="row ele-info" style="display: none;">
+
+                <div class="col-md-12 elecalc-table-outter">
+                  <table class="table elecalc-table" id="elecalc-table">
+                    <thead>
+                      <tr>
+                        <th>用戶戶號</th>
+                        <th>充電樁ID</th>
+                        <th>尖峰度數</th>
+                        <th>尖峰總計</th>
+                        <th>離峰度數</th>
+                        <th>離峰總計</th>
+                        <th>總度數</th>
+                        <th>總費用</th>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                      <tr>
+                        <td>A24610-2</td>
+                        <td>A330 </td>
+                        <td>10</td>
+                        <td>95</td>
+                        <td>10</td>
+                        <td>25</td>
+                        <td>20</td>
+                        <td>120</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-12">
+                  <canvas id="myChart" width="400" height="150"></canvas>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<!-- <script src="js/web.js?t=1"></script> -->
+<script>
+</script>
+
+
+
+<script src="pagejs/electricity.js"></script>

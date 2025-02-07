@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <title>華城電機 </title>
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
+  <link href="css/jquery-ui-timepicker-addon" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-datetimepicker.min.js"></script>
+  <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+  <script src="js/Chart.min.js"></script>
+  
+  <script src="js/vue.min.js"></script>
+
+</head>
+
+<body id="body">
+  <header class="navbar">
+    <a class="navbar-brand" href="index.html"> <img src="images/print-logo2.jpg"></a>
+    <div class="header-link">
+      <a class="link-btn" id="view-fullscreen" title="Full screen" href="javascript:void(0);"><i
+          class="bi bi-fullscreen"></i></a>
+      <a class="link-btn" id="cancel-fullscreen" title="Exit full screen" href="javascript:void(0);"
+        style="display: none;"><i class="bi bi-fullscreen-exit"></i></a>
+      <a class="link-btn" title="menu" id="menu-btn" href="javascript:void(0);"><i class="bi bi-list"></i></a>
+    </div>
+  </header>
+  <!-- start:sidebar -->
+  <div class="sidebar">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <span class="nav-icon">
+            <i class="bi bi-grid-1x2"></i>
+          </span>
+          <span class="nav-title">資訊儀表</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="charge-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-gear"></i>
+          </span>
+          <span class="nav-title">充電管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="electricity.html">
+          <span class="nav-icon">
+            <i class="bi bi-coin"></i>
+          </span>
+          <span class="nav-title">電費計算</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="history.html">
+          <span class="nav-icon">
+            <i class="bi bi-bar-chart-line"></i>
+          </span>
+          <span class="nav-title">歷史資訊</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="user-management.html">
+          <span class="nav-icon">
+            <i class="bi bi-person-rolodex"></i>
+          </span>
+          <span class="nav-title">用戶管理</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="system-admin.html">
+          <span class="nav-icon">
+            <i class="bi bi-shield-lock"></i>
+          </span>
+          <span class="nav-title">權限管理</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end:sidebar -->
+  <main id="main">
+    <div class="container-fulid">
+      <div class="dashboard history">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">設備用電資訊</h2>
+              <div class="tool-bar">
+                <div class="dateinput"><input type='text' id="datepicker-divice" class='pickDate  form-control ' name=''
+                    :value='today()' placeholder="年/月/日" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <div class="filiter-wrap">
+                  ID查詢：
+                  <select class='form-control selectID'>
+                    <option value="" selected>選擇充電樁ID</option>
+                    <option value="1101">1101</option>
+                    <option value="1102">1102</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-primary btn-round calc-btn " type="button" onclick="deviceSearch();">查詢</button>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <canvas id="TodayUse" width="400" height="150" style="display: none;"></canvas>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">站點用電資訊</h2>
+              <div class="tool-bar hasDownload">
+                <div class="dateinput"><input type='text' id="datepicker-usestart"
+                    class='pickDate  form-control start-time' name='starttime' :value='today()' placeholder="年/月/日" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <div class="dateinput dateinputEnd" style="display: none;"><input type='text' id="datepicker-useend"
+                    class='pickDate  form-control end-time' name='endtime' :value='today()' placeholder="年/月/日" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <div class="filiter-wrap">
+                  分析條件：
+                  <select class='form-control selectCondition'>
+                    <option value="day" selected>日</option>
+                    <option value="week">週</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary btn-round calc-btn " type="button" onclick="siteSearch();">查詢</button>
+                <div class="txt-proid" style="display:none;">顯示資料期間：2022/08/10~2022/10/20</div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <canvas id="DayUse" width="400" height="150" style="display: none;"></canvas>
+                </div>
+                <div class="col-md-12">
+                  <canvas id="WeekUse" width="400" height="150" style="display: none;"></canvas>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">充電紀錄</h2>
+              <div class="tool-bar hasDownload">
+                <div class="dateinput"><input type='text' id="datepicker-chargingset"
+                    class='pickDate  form-control set-time set-ym' name='settime' :value='thisMonth()' placeholder="年/月" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <div class="filiter-wrap">
+                  ID查詢：
+                  <select class='form-control selectID2'>
+                    <option value="" selected>選擇充電樁ID</option>
+                    <option value="1101">1001</option>
+                    <option value="1102">1002</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary btn-round calc-btn calc-btn-left" type="button"
+                  onclick="chargingRecordSearch();">查詢</button>
+                <a href="javascript:void(0)" class="btn btn-download btn-primary" id="chargingRecordDownload"
+                  download><i class="bi bi-download"></i> </a>
+              </div>
+              <div class="row">
+                <div class="col-md-12" id="charging-table-outter" style="display: none;">
+                  <div class="txt-info">
+                    <span>用戶名稱：HIRH</span>
+                    <span>充電樁ID：1001</span>
+                    <span>總充電時間：05:10:20</span>
+                    <span>總充電度數：35</span>
+
+                  </div>
+                  <table class="table rwd-table charging-table">
+                    <thead>
+                      <tr>
+                        <th>用戶名稱</th>
+                        <th>充電樁ID</th>
+                        <th>開始充電時間</th>
+                        <th>結束充電時間</th>
+                        <th>充電時間</th>
+                        <th>用電度數</th>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-th="用戶名稱">HIRH</td>
+                        <td data-th="充電樁ID">1001</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+
+                      </tr>
+                      <tr>
+                        <td data-th="用戶名稱">KWDFF</td>
+                        <td data-th="充電樁ID">1002</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+
+                      </tr>
+                      <tr>
+                        <td data-th="用戶名稱">OOFF</td>
+                        <td data-th="充電樁ID">1003</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+
+                      </tr>
+                      <tr>
+                        <td data-th="用戶名稱">HGQU</td>
+                        <td data-th="充電樁ID">1004</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+
+                      </tr>
+                      <tr>
+                        <td data-th="用戶名稱">PSC</td>
+                        <td data-th="充電樁ID">1005</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+
+                      </tr>
+                      <tr>
+                        <td data-th="用戶名稱">ZJFM</td>
+                        <td data-th="充電樁ID">1006</td>
+                        <td data-th="開始充電時間">2022-10-10 13:46:52</td>
+                        <td data-th="結束充電時間">2022-10-10 13:48:56</td>
+                        <td data-th="充電時間">00:02:04</td>
+                        <td data-th="用電度數">555</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="footer-bar" style="display:none">
+                    <p class=""> 每頁<input class="form-contorl row-number" style=" width: 40px; border: 0; "
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="3">列</p>
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination pagination-sm">
+                        <li class="page-item ">
+                          <a class="page-link" href="javascript:void(0);" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0);" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xl-12">
+            <div class="card">
+              <h2 class="page-title">異常紀錄</h2>
+              <div class="tool-bar hasDownload">
+                <div class="dateinput"><input type='text' id="abnormal-start" class='pickDate  form-control start-time'
+                    name='starttime' :value='today()' placeholder="年/月/日" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <div class="dateinput"><input type='text' id="abnormal-end" class='pickDate  form-control end-time'
+                    name='endtime' :value='today()' placeholder="年/月/日" readonly>
+                  <i class="bi bi-calendar"></i>
+                </div>
+                <button class="btn btn-primary btn-round calc-btn calc-btn-left" type="button"
+                  onclick="abnormalSearch();">查詢</button>
+                <a href="javascript:void(0)" class="btn btn-primary btn-download" id="abnormalDownload" download><i
+                    class="bi bi-download"></i></a>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table abnormal-table" style="display: none;" id="abnormal-table">
+                    <thead>
+                      <tr>
+                        <th>時間</th>
+                        <th>充電樁ID</th>
+                        <th>異常代碼</th>
+                        <th>異常原因</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20220808 11:32:51</td>
+                        <td>1001</td>
+                        <td>0</td>
+                        <td>Undervoltag</td>
+                      </tr>
+                      <tr>
+                        <td>20220808 11:32:51</td>
+                        <td>1002</td>
+                        <td>0</td>
+                        <td>Undervoltag</td>
+                      </tr>
+                      <tr>
+                        <td>20220808 11:32:51</td>
+                        <td>1003</td>
+                        <td>0</td>
+                        <td>Undervoltag</td>
+                      </tr>
+                      <tr>
+                        <td>20220808 11:32:51</td>
+                        <td>1004</td>
+                        <td>0</td>
+                        <td>Undervoltag</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  <div class="footer-bar" style="display:none">
+                    <p class=""> 每頁<input class="form-contorl row-number" style=" width: 40px; border: 0; "
+                        onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="3">列</p>
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination pagination-sm">
+                        <li class="page-item ">
+                          <a class="page-link" href="javascript:void(0);" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0);" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </main>
+</body>
+
+<footer class="footer"></footer>
+<script>
+  
+</script>
+<script src="pagejs/history.js"></script>
+
+<script src="js/web.js"></script>

@@ -1,0 +1,114 @@
+<div class="header container">
+    <div class="logo"><a href="index.html"><img src="images/logo01.png" alt=""></a></div>
+    <div class="nav-bar">
+        <ul class="menu">
+            <li class="menu-item about">
+                <a class="main_menu" href="about.html">華城儲能</a>
+                <ul class="m2">
+                    <li class="m2-item"><a href="about.html">公司簡介</a></li>
+                    <li class="m2-item"><a href="contact.html">聯繫我們</a></li>
+                    <li class="m2-item"><a href="idea.html">經營理念</a></li>
+                </ul>
+            </li>
+            <li class="menu-item service">
+                <a class="main_menu service_item_btn" href="service_1.html">服務方案</a>
+                <ul class="m2">
+                    <li class="m2-item"><a class="service_item_btn" href="service_1.html">電網級應用</a></li>
+                    <li class="m2-item"><a class="service_item_btn" href="service_2.html">再生能源+儲能</a></li>
+                    <li class="m2-item"><a class="service_item_btn" href="service_3.html">工商企業用戶</a></li>
+                    <li class="m2-item"><a class="service_item_btn" href="service_4.html">家戶應用</a></li>
+                    <li class="m2-item"><a class="service_item_btn" href="service_5.html">EMS能源管理</a></li>
+                    <li class="m2-item"><a href="dm.html">儲能維運服務方案
+                        </a></li>
+                </ul>
+            </li>
+            <li class="menu-item news">
+                <a class="main_menu" href="newslist.html">最新消息</a>
+                <ul class="m2">
+                    <li class="m2-item"><a href="newslist.html">華城儲能動態消息</a></li>
+                    <li class="m2-item"><a href="news_2台電電力交易平台.html">電力交易平台</a></li>
+                    <li class="m2-item"><a href="news_6太陽光電與儲能系統結合設置.html">光儲結合系統設置</a></li>
+                    <li class="m2-item"><a href="news_7用電大戶.html">用電大戶條款介紹</a></li>
+                    <li class="m2-item"><a href="news_8各縣市補助規定.html">各地政府儲能補助與相關規定</a></li>
+                </ul>
+            </li>
+            <li class="menu-item performance">
+                <a class="main_menu" href="javascript:void(0);">應用實績</a>
+                <ul class="m2">
+                    <li class="m2-item"><a href="AFC.html">AFC</a></li>
+                    <li class="m2-item"><a href="Business_users.html">工商企業用戶</a></li>
+                    <li class="m2-item"><a href="https://www.fortune-ess.com.tw/EMS/chargestationems/index.html"
+                            target="_blank">EMS能源管理</a></li>
+                    <li class="m2-item"><a href="ess.html">光儲充應用</a></li>
+                </ul>
+            </li>
+            <li class="menu-item irr">
+                <a class="main_menu" href="irr.html">線上試算</a>
+                <ul class="m2">
+                    <li class="m2-item"><a href="irr.html">儲能&光儲試算</a></li>
+                    <li class="m2-item"><a href="bid.html">dReg0.25競價分析</a></li>
+                </ul>
+            </li>
+
+
+            <li class="menu-item fortune_index">
+                <a class="fortune_index" href="https://www.fortune.com.tw/tw/index.aspx" target="_blank">華城官網</a>
+            </li>
+        </ul>
+    </div>
+    <div class="hanberger"><span></span></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var windowsize = $(window).width();
+        if (windowsize <= 768) {
+            $(".nav-bar").hide();
+        } else {
+            $(".nav-bar").show()
+        }
+        var height = $('.swipervideo').height();
+        $('.swiper-slide').css('height', height)
+
+
+
+    })
+
+    $(window).resize(function () {
+        var windowsize = $(window).width();
+        if (windowsize <= 992) {
+            $(".nav-bar").hide();
+        } else {
+            $(".nav-bar").show()
+        }
+    })
+    $(".hanberger").click(function () {
+        $(".nav-bar").slideToggle();
+    })
+    $('.hanberger').addClass("act")
+    $(window).scroll(() => {
+        var scrollY = window.scrollY;
+        if (scrollY < 100) {
+
+            $('header').addClass("act")
+            $('.hanberger').addClass("act")
+        } else {
+            $('.hanberger').removeClass("act")
+            $('header').removeClass('act');
+        }
+    });
+    $(window).scroll(() => {
+        var scrollY = window.scrollY;
+        if (scrollY > 100) {
+            $('header').addClass("act")
+        } else {
+            $('header').removeClass('act');
+        }
+    });
+    // $(window).resize(function(){
+    //     var height = $('.swiper-slide').width();
+    //     $('.swipervideo').css('width',height * 1.5)
+    // })
+
+</script>

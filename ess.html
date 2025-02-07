@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華城電機-案例實績-光儲充應用</title>
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/page.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+</head>
+<style>
+    .swiper-slide {
+        text-align: center;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 278px;
+        background-color: #ddd;
+    }
+
+    .swiper-slide img {
+        object-fit: contain;
+        max-height: 278px;
+        width: auto;
+    }
+    .youtube_btn{
+        color: red;
+    }
+</style>
+
+<body>
+    <header>
+
+    </header>
+    <div class="banner">
+        <div class="block_bg">
+            <img src="images/use_bg.jpg" alt="">
+        </div>
+    </div>
+    <main>
+
+
+        </div>
+        <h3 class="page-title">案例實績</h3>
+        <div class="container ">
+            <div class="info-title">光儲充應用</div>
+            <div class="project-box">
+                <div class="project-photo">
+                    <div class="swiper-container pjSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="images/application/光儲充應用/圖片1.jpg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/application/光儲充應用/圖片2.png">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/application/光儲充應用/圖片3.jpg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/application/光儲充應用/圖片5.jpg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="images/application/光儲充應用/圖片15.jpg">
+                            </div>
+                        </div>
+                        <div class="swiper-pagination pj-pagination"></div>
+                        <div class="swiper-button-next pj-next swiper-button-white" data-tag="next"></div>
+                        <div class="swiper-button-prev pj-prev swiper-button-white" data-tag="prev"></div>
+                    </div>
+                </div>
+                <!--end project-photo -->
+                <div class="project-content">
+                    <div class="project-name">華城電能EVALUE內湖旗艦站
+                    </div>
+                    <div class="project-info">
+                        <li><span>全台首座電動車光儲充智慧停車站</span></li>
+                        <li><span>全台最高功率480kW充電樁</span></li>
+                        <li><span>儲能容量：</span> 66kWH電池</li>
+                        <li><span>地點：</span>台北內湖</li>
+                        <li><span>建置過程紀錄影片：</span> <a href="https://www.youtube.com/watch?v=J3_CW048Vcg" target="_blank">觀看影片<i class="bi bi-youtube youtube_btn"></i></a> </li>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        var swiper = new Swiper('.pjSwiper', {
+            slidesPerView: 1,
+            navigation: {
+                nextEl: ".swiper-button-next.pj-next",
+                prevEl: ".swiper-button-prev.pj-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination.pj-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+    <script src="js/web.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+.block_bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cover-txt {
+    position: absolute;
+    z-index: 2;
+}
+
+.block_bg .page-title {
+    font-size: 54px;
+    color: #fff;
+}
+
+.banner img {
+    margin: 5rem auto;
+}
+
+/* revised 0818 */
+
+.img-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-container img {
+    max-width: 100%;
+}
+
+.bid-container {
+    position: relative;
+    display: inline-block;
+}
+
+.bid-container button {
+    position: absolute;
+    bottom: 4.3rem;
+    left: 70%;
+    padding: 1.5rem 4.3rem;
+    background: #6CC92D;
+    color: #fff;
+    border: none;
+    border-radius: 6.2rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+    border: 0.6rem solid #feff00;
+    max-width: fit-content;
+}
+
+.afc-desc {
+    background: #dae3f4;
+}
+
+.afc-desc img {
+    max-width: 100%;
+}
+
+button.bid-btn.bottom {
+    position: absolute;
+    left: 40%;
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    padding: 1.5rem 4.5rem;
+}
+
+.bid-btn.bottom:link,
+.bid-btn.bottom:visited,
+.bid-btn:link,
+.bid-btn:visited {
+    transition: all .2s;
+}
+
+.bid-btn.bottom:hover,
+.bid-btn:hover {
+    transform: translateY(-0.6rem);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+
+.bid-btn.bottom:active,
+.bid-btn:active {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.text-center.banner {
+    margin: -5.5rem auto 5rem;
+}
+
+.bid-btn:link,
+.bid-btn:visited {
+    transition: all .2s;
+}
+
+.bid-btn:hover {
+    transform: translateY(-0.6rem);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+
+.bid-btn:active {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.text-center.banner {
+    margin: -5.5rem auto 1rem;
+}
+
+.bid-container,
+.afc-desc {
+    margin-bottom: 1rem;
+}
+
+footer {
+    margin-top: -1.5rem;
+}
+
+
+@media screen and (max-width: 667px) {
+
+    .banner img {
+        margin: -0.5rem auto 0.5rem;
+    }
+
+    .bid-container button.bid-btn {
+
+        left: 71%;
+        bottom: 4%;
+        transform: translate(20%);
+        padding: 0.6rem 1.2rem;
+        border: none;
+        font-size: 0.1rem;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-container button.bid-btn.bottom {
+        left: 42%;
+        margin-bottom: 1.7rem;
+        font-size: 0.1rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    body footer {
+        margin-top: -7rem;
+    }
+
+}
+
+@media screen and (min-width:820px) and (max-width: 1180px) {
+    .banner img {
+        margin: -0.5rem auto 0.5rem;
+    }
+
+    .bid-container button.bid-btn {
+        left: 20%;
+        padding: 0.6rem 1.2rem;
+        border-radius: 6.2rem;
+        font-size: 2.5rem;
+        font-weight: bold;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-container button.bid-btn.bottom {
+        left: 20%;
+        font-size: 2.5rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .bid-btn:link,
+    .bid-btn:visited {
+        transition: all .2s;
+    }
+
+    .bid-btn:hover {
+        transform: translateY(-0.6rem);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    }
+
+    .bid-btn:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .text-center.banner {
+        margin: -5.5rem auto 1rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    body footer {
+        margin-top: -10.3rem;
+    }
+}
+
+@media screen and (max-width: 653px) {
+    .bid-container button {
+        position: absolute;
+        bottom: 0.1rem;
+        left: 60%;
+        transform: translate(1.05);
+        background: #6CC92D;
+        color: #fff;
+        border: none;
+        border-radius: 3.5rem;
+        font-size: 0.01%;
+        border: 0.4rem solid #feff00;
+        margin-left: -3.5rem;
+        margin-bottom: -0.55rem;
+    }
+
+    .bid-btn.bottom {
+        bottom: 6.3rem;
+        left: 37%;
+        transform: translate(1.01%);
+        padding: 1rem 2.5rem;
+        background: #6CC92D;
+        color: #fff;
+        border: none;
+        border-radius: 3.5rem;
+        font-size: 1.3rem;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-btn:link,
+    .bid-btn:visited {
+        transition: all .2s;
+    }
+
+    .bid-btn:hover {
+        transform: translateY(-0.6rem);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    }
+
+    .bid-btn:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .text-center.banner {
+        margin: -5.5rem auto 1rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    footer {
+        margin-top: -0.3rem;
+    }
+}
+
+@media screen and (max-width: 914px) {
+    .bid-container button {
+        position: absolute;
+        bottom: 0.8rem;
+        left: 69%;
+        transform: translate(1.05);
+        padding: 0.5rem 1rem;
+        background: #6CC92D;
+        color: #fff;
+        border: none;
+        border-radius: 3.5rem;
+        font-size: 0.01%;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-btn.bottom {
+        bottom: 6.3rem;
+        right: 28%;
+        padding: 1rem 1rem;
+        background: #6CC92D;
+        color: #fff;
+        border: none;
+        border-radius: 3.5rem;
+        font-size: 1.5rem;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-btn:link,
+    .bid-btn:visited {
+        transition: all .2s;
+    }
+
+    .bid-btn:hover {
+        transform: translateY(-0.6rem);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    }
+
+    .bid-btn:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .text-center.banner {
+        margin: -5.5rem auto 1rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    footer {
+        margin-top: -0.3rem;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width: 1024px) {
+    .banner img {
+        margin: -0.5rem auto 0.5rem;
+    }
+
+    .bid-container button.bid-btn {
+        position: absolute;
+        bottom: 3.4rem;
+        left: 69%;
+        transform: translate(-5%, 16%);
+        padding: 1rem 2.5rem;
+        border: 0.4rem solid #feff00;
+        border-radius: 6.2rem;
+        font-size: 2rem;
+    }
+
+    .bid-container button.bid-btn.bottom {
+        position: absolute;
+        left: 26%;
+        bottom: 1rem;
+        transform: translate(55%, -20%);
+        padding: 1rem 2.5rem;
+        border-radius: 6.2rem;
+        font-size: 2rem;
+
+
+    }
+
+    .bid-btn:link,
+    .bid-btn:visited {
+        transition: all .2s;
+    }
+
+    .bid-btn:hover {
+        transform: translateY(-0.6rem);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    }
+
+    .bid-btn:active {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .text-center.banner {
+        margin: -5.5rem auto 1rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    body footer {
+        margin-top: -7rem;
+    }
+}
+
+@media screen and (max-width:1024px) and (max-height:600px) {
+    .banner img {
+        margin: 1rem auto;
+    }
+
+    .bid-container button.bid-btn {
+        left: 50%;
+        transform: translate(110%, -6%);
+        border-radius: 6.2rem;
+        font-size: 2.1rem;
+        padding: 1rem 2.5rem;
+        border: 0.4rem solid #feff00;
+    }
+
+    .bid-container button.bid-btn.bottom {
+        position: absolute;
+        left: 40%;
+        transform: translate(7%, -33%);
+        border-radius: 6.2rem;
+        font-size: 2.3rem;
+        padding: 1rem 2.5rem;
+    }
+
+
+    .text-center.banner {
+        margin: -5.5rem auto 1rem;
+    }
+
+    .bid-container,
+    .afc-desc {
+        margin-bottom: 1rem;
+    }
+
+    .img-container {
+        margin-bottom: -9rem;
+    }
+
+    body footer {
+        margin-top: 12rem;
+    }
+}
