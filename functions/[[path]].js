@@ -28,8 +28,6 @@ export const onRequest = async ({ request, next }) => {
   // 內容安全策略，允許unsafe-inline
   headers.set('Content-Security-Policy', 'unsafe-inline')
 
-  headers.set('X-Debug-Middleware', 'true')
-
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
